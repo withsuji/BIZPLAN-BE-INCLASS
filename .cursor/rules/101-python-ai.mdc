@@ -1,0 +1,23 @@
+---
+description: Python AI/LLM Service Rules
+globs: ["**/*.py"]
+---
+# Tech Stack (C-TEC-004, C-TEC-005)
+- **Language:** Python 3.10+
+- **Framework:** FastAPI
+- **Libraries:** LangChain, Pydantic
+- **LLM Gateway:** Use internal LLM Gateway (OpenAI compatible interface) wrapping Google Gemini.
+
+# Coding Standards
+- **Style:** Follow PEP 8. Use `black` or `ruff` for formatting.
+- **Type Hinting:** Mandatory for all function signatures (e.g., `def process_text(text: str) -> dict:`).
+- **Async:** Leverage `async/await` for I/O bound operations (LLM calls, DB).
+- **Structure:**
+  - `routers/`: API endpoints
+  - `services/`: Business logic & LLM chains
+  - `models/`: Pydantic models (Request/Response)
+  - `prompts/`: Prompt templates (stored as text or py files)
+
+# AI/LLM Specifics
+- **Prompts:** Keep prompts versioned or in a dedicated directory.
+- **Error Handling:** Handle LLM timeouts and parsing errors gracefully. Implement retries with exponential backoff.

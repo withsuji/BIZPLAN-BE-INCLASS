@@ -1,0 +1,24 @@
+---
+description: Java Spring Boot Backend Rules
+globs: ["**/*.java", "**/build.gradle", "**/pom.xml"]
+---
+# Tech Stack (C-TEC-002)
+- **Language:** Java 17
+- **Framework:** Spring Boot 3.x
+- **Build Tool:** Gradle (Preferred) or Maven
+- **Architecture:** Layered Architecture (Controller -> Service -> Repository)
+
+# Coding Standards
+- **Naming:**
+  - Classes: `PascalCase` (e.g., `UserService`)
+  - Methods/Variables: `camelCase` (e.g., `getUserById`)
+  - Constants: `UPPER_SNAKE_CASE` (e.g., `MAX_RETRY_COUNT`)
+  - DTOs: Suffix with `Dto` or `Request`/`Response` (e.g., `UserCreateRequest`)
+- **Lombok:** Use Lombok annotations (`@Getter`, `@RequiredArgsConstructor`, `@Builder`) to reduce boilerplate.
+- **Dependency Injection:** Use Constructor Injection (via `@RequiredArgsConstructor`) instead of `@Autowired` on fields.
+- **Error Handling:** Use `@RestControllerAdvice` for global exception handling. Return standard API error responses.
+- **Logging:** Use `@Slf4j`. Do not use `System.out.println`.
+
+# Testing
+- **Framework:** JUnit 5 + Mockito.
+- **Requirement:** Business logic in Services must be unit tested. Controllers should have integration tests (`@WebMvcTest` or `@SpringBootTest`).

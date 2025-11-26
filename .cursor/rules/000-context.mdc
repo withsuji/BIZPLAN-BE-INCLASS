@@ -1,0 +1,18 @@
+---
+description: Project Context & General Rules
+globs: ["**/*"]
+---
+# Project Context
+- **Project Name:** Calendar Agent (BIZPLAN)
+- **Goal:** AI Productivity Tracking Automation (Schedule -> Time Tracking -> Invoice)
+- **Key Documents:**
+  - PRD: `docs/GPT-PRD.md`
+  - SRS: `docs/GPT-SRS-v02.md`
+  - WBS: `docs/MVP_Task_WBS_and_DAG.md`
+
+# General Rules
+- **Language:**
+  - **Chat/Communication:** Korean (한국어) is mandatory for all interactions with the user.
+  - **Code Comments:** English is preferred for technical comments unless explaining complex business logic specific to the Korean market.
+  - **Commit Messages:** English (Conventional Commits), e.g., `feat: add user login`.
+- **Documentation:** Always reference the PRD and SRS when making architectural decisions.

@@ -1,0 +1,22 @@
+---
+description: Database & Persistence Rules
+globs: ["**/*.sql", "**/*.java", "**/*.py"]
+---
+# Tech Stack (C-TEC-003)
+- **Database:** AWS Aurora MySQL 3.x (MySQL 8.x compatible)
+- **Engine:** InnoDB
+- **Charset:** `utf8mb4`
+
+# Schema Rules
+- **Naming:**
+  - Tables: `snake_case`, plural (e.g., `users`, `calendar_events`)
+  - Columns: `snake_case` (e.g., `created_at`, `user_id`)
+  - PK: `id` (BigInt/Long)
+  - FK: `target_table_singular_id` (e.g., `team_id`)
+- **Indexes:** Must index FK columns and frequently queried fields (e.g., `email`, `status`).
+- **Soft Delete:** Use `deleted_at` (timestamp) or `is_deleted` (boolean) if required by business logic, but prefer standard normalization.
+
+# Persistence Layer (Java)
+- **ORM:** JPA (Hibernate)
+- **Migrations:** Use Flyway or Liquibase for schema changes. Never rely on `ddl-auto=update` in production.
+- **Transactions:** Use `@Transactional(readOnly = true)` by default on Service methods, override with `@Transactional` for write operations.

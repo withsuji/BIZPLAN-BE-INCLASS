@@ -1,0 +1,29 @@
+---
+description: API Design & Documentation Rules
+globs: ["**/*.java", "**/*.py", "**/*.yaml", "**/*.yml"]
+---
+# API Standards (C-TEC-006)
+- **Protocol:** REST (JSON)
+- **Documentation:** OpenAPI 3.x (Swagger)
+  - Spring Boot: Use `springdoc-openapi`
+  - FastAPI: Automatic via `/docs`
+
+# Path & Methods
+- **Resources:** Plural nouns (e.g., `/api/v1/users`)
+- **Methods:**
+  - `GET`: Retrieve
+  - `POST`: Create or complex actions (e.g., `/summary`)
+  - `PUT`/`PATCH`: Update (prefer PATCH for partial)
+  - `DELETE`: Remove
+
+# Response Format
+- **Success:** Standard JSON body or 204 No Content.
+- **Dates:** ISO-8601 format (`yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`).
+- **Errors:**
+  ```json
+  {
+    "code": "ERROR_CODE",
+    "message": "Human readable message",
+    "details": { ... }
+  }
+  ```
