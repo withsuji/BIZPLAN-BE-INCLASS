@@ -1,208 +1,159 @@
-# GitHub Issues - MVP Task Management
+# GitHub Issues 관리 문서
 
 ## 📋 개요
-본 디렉토리는 `docs/MVP_Task_WBS_and_DAG.md`의 의존성 그래프를 기반으로 생성된 GitHub Issue 문서들을 포함합니다.
+
+이 디렉토리는 `docs/MVP_Task_WBS_and_DAG.md`에 정의된 **의존성 그래프(DAG)**를 기반으로 작성된 GitHub Issue 문서들을 포함합니다.
+
+각 이슈는 **작업 순서(토폴로지 정렬)**에 맞게 번호가 부여되어 있으며, 선후행 관계와 병렬 개발 가능 여부가 명확하게 정의되어 있습니다.
 
 ---
 
-## 📂 파일 구조
+## 📁 파일 구조
 
 ```
-github-issues/
-├── README.md                        # 본 파일
-├── ISSUE_EXECUTION_GUIDE.md         # 이슈 수행 순서 및 병렬 개발 가이드
+tasks/github-issues/
+├── README.md                      # 본 문서
+├── ISSUE_EXECUTION_ORDER.md       # ⭐ 이슈 실행 순서 및 병렬 개발 가이드
+├── QUICK_START.md                 # 빠른 시작 가이드
+├── create_issues.sh               # GitHub Issue 자동 생성 스크립트
 │
-├── 001_EPIC4-SYS-001_Infrastructure.md  ✅ 발행 필요
-├── 002_EPIC4-SYS-002_OAuth.md           ✅ 발행 필요
-├── ~~003_EPIC0-FE-001_Layout.md~~       ❌ 완료됨 (발행 불필요)
-├── 004_EPIC4-SYS-003_CICD.md            ✅ 발행 필요
-├── ~~005_EPIC0-FE-002_Schedule.md~~     ❌ 완료됨 (발행 불필요)
-├── ~~006_EPIC0-FE-003_Dashboard.md~~    ❌ 완료됨 (발행 불필요)
-├── 007_EPIC4-NFR-001_Logging.md         ✅ 발행 필요
-├── ~~008_EPIC0-FE-004_Summary.md~~      ❌ 완료됨 (발행 불필요)
-├── ~~009_EPIC0-FE-005_Billing.md~~      ❌ 완료됨 (발행 불필요)
-├── 010_EPIC1-BE-001_Calendar_Sync.md    ✅ 발행 필요
-├── 011_EPIC1-BE-002_Policy.md           ✅ 발행 필요
-├── 012_EPIC2-BE-001_Focus.md            ✅ 발행 필요
-├── 013_EPIC3-BE-001_Time_Tracking.md    ✅ 발행 필요
-├── 014_EPIC2-AI-001_LLM.md              ✅ 발행 필요
-├── 015_EPIC1-BE-003_Slot.md             ✅ 발행 필요
-├── 016_EPIC2-BE-002_Summary_Storage.md  ✅ 발행 필요
-├── 017_EPIC3-BE-002_Invoice.md          ✅ 발행 필요
-└── 018_EPIC3-BE-003_Payment.md          ✅ 발행 필요
+├── 001_EPIC4-SYS-001_Infrastructure.md    # Level 0
+├── 002_EPIC4-SYS-002_OAuth.md             # Level 0
+├── 003_EPIC4-SYS-003_CICD.md              # Level 0
+├── 004_EPIC0-FE-001_Layout.md             # Level 0
+│
+├── 005_EPIC0-FE-002_Schedule.md           # Level 1
+├── 006_EPIC0-FE-003_Dashboard.md          # Level 1
+│
+├── 007_EPIC4-NFR-001_Logging.md           # Level 2
+├── 008_EPIC0-FE-004_Summary.md            # Level 2
+├── 009_EPIC0-FE-005_Billing.md            # Level 2
+├── 010_EPIC1-BE-001_Calendar_Sync.md      # Level 2 (Critical Path)
+├── 011_EPIC2-AI-001_LLM.md                # Level 2
+│
+├── 012_EPIC1-BE-002_Policy.md             # Level 3 (Critical Path)
+├── 013_EPIC2-BE-001_Focus.md              # Level 3
+├── 014_EPIC3-BE-001_Time_Tracking.md      # Level 3
+├── 015_EPIC2-BE-002_Summary_Storage.md    # Level 3
+│
+├── 016_EPIC1-BE-003_Slot.md               # Level 4 (Critical Path)
+├── 017_EPIC3-BE-002_Invoice.md            # Level 4
+│
+└── 018_EPIC3-BE-003_Payment.md            # Level 5
 ```
-
-**발행 필요한 이슈**: 13개 (001, 002, 004, 007, 010~018)
 
 ---
 
-## 🎯 이슈 목록 (전체 18개, 활성 13개)
+## 📊 이슈 목록
 
-### ~~EPIC-0: FE PoC Prototype (5개)~~ ✅ **완료됨**
-> 별도 프로젝트에서 완수되어 GitHub Issue 생성 불필요
+> **📢 참고**: EPIC-0 FE 이슈들(#004~#006, #008~#009)은 **별도 프론트엔드 프로젝트에서 완료**되어  
+> GitHub Issue 발행 대상에서 제외됩니다.
 
-| Issue | Title | Size | Status |
-|-------|-------|------|--------|
-| ~~#003~~ | ~~공통 레이아웃 및 내비게이션 구현~~ | S | ✅ 완료 |
-| ~~#005~~ | ~~스케줄링 링크 및 예약 페이지 UI~~ | M | ✅ 완료 |
-| ~~#006~~ | ~~대시보드 및 캘린더 메인 뷰 UI~~ | M | ✅ 완료 |
-| ~~#008~~ | ~~회의 요약 및 액션 아이템 뷰 UI~~ | S | ✅ 완료 |
-| ~~#009~~ | ~~시간 기록 및 인보이스 관리 UI~~ | M | ✅ 완료 |
-
-### EPIC-1: Calendar Core Service (3개)
-| Issue | Title | Size | Dependencies |
-|-------|-------|------|--------------|
-| #010 | Google/Outlook Calendar 양방향 동기화 | XL | #001, #002 |
-| #011 | 타임존 정규화 및 업무시간/공휴일 정책 엔진 | L | #010 |
-| #015 | 가용 슬롯 계산 알고리즘 및 최적 시간대 제안 | XL | #011 |
-
-### EPIC-2: Focus & AI Service (3개)
-| Issue | Title | Size | Dependencies |
-|-------|-------|------|--------------|
-| #012 | 포커스 블록 생성 및 동적 차단 규칙 | L | #010 |
-| #014 | 회의 녹취/노트 LLM 요약 파이프라인 | XL | #001 |
-| #016 | LLM 요약 결과 파싱 및 구조화 저장 | L | #014 |
-
-### EPIC-3: Billing & Time Tracking (3개)
-| Issue | Title | Size | Dependencies |
-|-------|-------|------|--------------|
-| #013 | 캘린더 이벤트 기반 자동 시간 기록 | XL | #010 |
-| #017 | 인보이스 자동 생성 및 상태 관리 | XL | #013 |
-| #018 | Stripe 결제 게이트웨이 연동 및 Webhook | L | #017 |
-
-### EPIC-4: System & NFR (4개)
-| Issue | Title | Size | Dependencies |
-|-------|-------|------|--------------|
-| #001 | AWS 인프라 및 데이터베이스 환경 구축 | L | - |
-| #002 | OAuth 2.0 인증 서버 구성 및 JWT 핸들링 | L | #001 |
-| #004 | CI/CD 파이프라인 구성 (GitHub Actions) | M | #001 |
-| #007 | 구조화 로깅 및 모니터링 설정 | M | #001 |
+| Issue # | Epic | Task ID | Title | Effort | Dependencies | 상태 |
+|---------|------|---------|-------|--------|--------------|------|
+| #001 | EPIC-4 | SYS-001 | AWS 인프라 및 DB 구축 | L | - | 📋 발행 대상 |
+| #002 | EPIC-4 | SYS-002 | OAuth 2.0 인증 구현 | L | #001 | 📋 발행 대상 |
+| #003 | EPIC-4 | SYS-003 | CI/CD 파이프라인 구성 | M | #001 | 📋 발행 대상 |
+| ~~#004~~ | EPIC-0 | FE-001 | 공통 레이아웃 및 내비게이션 | S | - | ✅ **완료** |
+| ~~#005~~ | EPIC-0 | FE-002 | 스케줄링 예약 페이지 UI | M | #004 | ✅ **완료** |
+| ~~#006~~ | EPIC-0 | FE-003 | 대시보드 및 캘린더 뷰 | M | #004 | ✅ **완료** |
+| #007 | EPIC-4 | NFR-001 | 구조화 로깅 및 모니터링 | M | #001 | 📋 발행 대상 |
+| ~~#008~~ | EPIC-0 | FE-004 | 회의 요약 및 액션 아이템 뷰 | S | #006 | ✅ **완료** |
+| ~~#009~~ | EPIC-0 | FE-005 | 시간 기록 및 인보이스 UI | M | #006 | ✅ **완료** |
+| #010 | EPIC-1 | BE-001 | Calendar 양방향 동기화 | XL | #001, #002 | 📋 발행 대상 |
+| #011 | EPIC-2 | AI-001 | LLM 요약 파이프라인 | XL | #001 | 📋 발행 대상 |
+| #012 | EPIC-1 | BE-002 | 정책 엔진 (타임존/업무시간) | L | #010 | 📋 발행 대상 |
+| #013 | EPIC-2 | BE-001 | 포커스 블록 및 차단 규칙 | L | #010 | 📋 발행 대상 |
+| #014 | EPIC-3 | BE-001 | 자동 시간 기록 | XL | #010 | 📋 발행 대상 |
+| #015 | EPIC-2 | BE-002 | LLM 요약 저장 및 Action Item | L | #011 | 📋 발행 대상 |
+| #016 | EPIC-1 | BE-003 | 가용 슬롯 계산 알고리즘 | XL | #012 | 📋 발행 대상 |
+| #017 | EPIC-3 | BE-002 | 인보이스 자동 생성 | XL | #014 | 📋 발행 대상 |
+| #018 | EPIC-3 | BE-003 | Stripe 결제 연동 | L | #017 | 📋 발행 대상 |
 
 ---
 
-## 🔗 주요 의존성 체인
+## 🚨 Critical Path
 
-### Critical Path (가장 긴 경로)
-```
-#001 → #002 → #010 → #011 → #015
- (L)    (L)    (XL)    (L)    (XL)
-```
-**예상 소요 시간**: 25-30일
+MVP 완료까지의 **최장 경로**입니다. 이 경로의 지연은 전체 프로젝트 지연으로 이어집니다.
 
-### Calendar Core Path
 ```
-#001 → #002 → #010 → #011 → #015
-                  ↓
-                #012 (Focus Blocks)
-                  ↓
-                #013 (Time Tracking) → #017 (Invoice) → #018 (Payment)
+#001 → #002 → #010 → #012 → #016
+  L       L      XL      L      XL    = ~31일
 ```
 
-### AI Path
-```
-#001 → #014 (LLM Pipeline) → #016 (Summary Storage)
-```
-
-### ~~FE Path~~ ✅ **완료됨**
-```
-✅ #003 → ✅ #005 (Schedule UI)
-       → ✅ #006 (Dashboard UI) → ✅ #008 (Summary UI)
-                                → ✅ #009 (Billing UI)
-```
-> FE PoC는 별도 프로젝트에서 완료되었으므로 백엔드 API 연동만 남음
+**해당 이슈들은 최우선 처리가 필요합니다.**
 
 ---
 
-## 📊 통계
+## 🔄 병렬 개발 그룹 (BE 중심)
 
-- **총 이슈 수**: 18개
-- **완료된 이슈**: 5개 (EPIC-0 전체)
-- **발행 필요 이슈**: 13개
-- **Size 분포** (발행 필요):
-  - S (Small): 0개
-  - M (Medium): 2개 (#004, #007)
-  - L (Large): 7개 (#001, #002, #011, #012, #016, #017, #018)
-  - XL (Extra Large): 4개 (#010, #013, #014, #015)
-- **Epic 분포** (발행 필요):
-  - ~~EPIC-0 (FE PoC): 5개~~ ✅ 완료
-  - EPIC-1 (Calendar): 3개
-  - EPIC-2 (Focus & AI): 3개
-  - EPIC-3 (Billing): 3개
-  - EPIC-4 (System): 4개
+> **참고**: FE 그룹은 별도 프로젝트에서 완료되어 제외됨
+
+| 그룹 | 이슈들 | 병렬 가능 조건 | 상태 |
+|------|--------|---------------|------|
+| group-0 | #001 | 인프라 기반 | 📋 발행 대상 |
+| ~~group-0-fe~~ | ~~#004~~ | ~~FE 기반~~ | ✅ 완료 |
+| ~~group-1-fe~~ | ~~#005, #006~~ | ~~둘 다 #004 의존~~ | ✅ 완료 |
+| group-2-be | #007, #010, #011 | 모두 #001 의존 | 📋 발행 대상 |
+| ~~group-2-fe~~ | ~~#008, #009~~ | ~~둘 다 #006 의존~~ | ✅ 완료 |
+| group-3 | #012, #013, #014 | 모두 #010 의존 | 📋 발행 대상 |
+| group-4 | #016, #017 | 서로 다른 경로 | 📋 발행 대상 |
 
 ---
 
-## 🚀 GitHub Issue 생성 방법
+## 📌 사용법
 
-> ⚠️ **주의**: EPIC-0 (FE PoC) 이슈들(#003, #005, #006, #008, #009)은 이미 완료되어 생성 불필요
-
-### 방법 1: 수동 생성
-각 Markdown 파일의 내용을 복사하여 GitHub Issues에 직접 생성합니다.
-**EPIC-0 파일들(003, 005, 006, 008, 009)은 제외하세요.**
-
-### 방법 2: GitHub CLI 사용 (권장)
+### 1. 이슈 실행 순서 확인
 ```bash
-# gh CLI 설치 및 로그인
-gh auth login
-
-# EPIC-0 제외하고 이슈 생성
-cd tasks/github-issues
-
-# 백엔드 및 인프라 이슈만 생성 (EPIC-0 제외)
-for file in 001_*.md 002_*.md 004_*.md 007_*.md 010_*.md 011_*.md 012_*.md 013_*.md 014_*.md 015_*.md 016_*.md 017_*.md 018_*.md; do
-  [ -f "$file" ] || continue
-  title=$(grep "^title:" $file | sed 's/title: //' | tr -d '"[]')
-  labels=$(grep "^labels:" $file | sed 's/labels: //' | tr -d '[]"' | tr ',' ' ')
-  gh issue create --title "$title" --body-file "$file" --label "$labels"
-done
+# 상세 실행 순서 및 병렬 개발 가이드
+cat ISSUE_EXECUTION_ORDER.md
 ```
 
-### 방법 3: GitHub API 사용
-Python 스크립트 등으로 자동화 가능 (별도 스크립트 작성 필요)
+### 2. GitHub Issue 자동 생성
+```bash
+# GitHub CLI 필요
+chmod +x create_issues.sh
+./create_issues.sh
+```
+
+### 3. 개별 이슈 확인
+각 `NNN_*.md` 파일에는 다음 정보가 포함되어 있습니다:
+- YAML Front Matter (메타데이터)
+- 상세 요구사항
+- 구현 가이드
+- 완료 조건 (Acceptance Criteria)
+- 의존성 정보
 
 ---
 
-## 📖 사용 가이드
+## 📚 관련 문서
 
-### 1. 이슈 수행 순서 확인
-`ISSUE_EXECUTION_GUIDE.md` 문서를 참고하여 작업 순서와 병렬 가능 작업을 확인합니다.
-
-### 2. 이슈 시작 전 체크리스트
-- [ ] 선행 작업(Dependencies) 완료 확인
-- [ ] 필요한 리소스 및 권한 확보
-- [ ] 팀원과 병렬 작업 조율
-
-### 3. 이슈 진행 중
-- [ ] "In Progress" 상태로 변경
-- [ ] 진행 상황을 Issue Comment로 업데이트
-- [ ] 블로커 발생 시 즉시 공유
-
-### 4. 이슈 완료 시
-- [ ] 완료 조건(Completion Criteria) 모두 충족
-- [ ] 코드 리뷰 완료
-- [ ] 테스트 통과
-- [ ] 문서 업데이트 (필요 시)
-- [ ] Issue Close
+- **WBS & DAG**: `docs/MVP_Task_WBS_and_DAG.md`
+- **작업 명세 (Functional)**: `tasks/functional/`
+- **작업 명세 (Non-Functional)**: `tasks/non-functional/`
+- **SRS 문서**: `docs/GPT-SRS-v02.md`
 
 ---
 
 ## ⚠️ 주의사항
 
-1. **의존성 준수**: Dependencies가 완료되기 전에 작업 시작 금지
-2. **Critical Path 우선**: #001 → #002 → #010 → #011 → #015 경로 최우선 처리
-3. **인터페이스 합의**: 병렬 작업 시 API 인터페이스를 먼저 합의
-4. **Mock 활용**: FE는 Mock API로 먼저 개발, BE 완성 후 연동
+1. **순서 준수**: 이슈 번호 순서는 DAG 의존성을 반영합니다.
+2. **의존성 확인**: 이슈 시작 전 `dependencies` 필드의 모든 이슈가 완료되었는지 확인하세요.
+3. **병렬 개발**: `parallel_group`이 같은 이슈들은 동시 진행 가능합니다.
+4. **Critical Path**: `critical-path` 라벨이 있는 이슈는 최우선 처리하세요.
+5. **FE 이슈 제외**: EPIC-0 FE 이슈들(`skip_github_issue: true`)은 별도 프로젝트에서 완료되어 GitHub Issue 발행에서 제외됩니다.
 
 ---
 
-## 📞 문의 및 지원
-- 의존성 관련 질문: 프로젝트 매니저에게 문의
-- 기술적 질문: 해당 Epic 리드에게 문의
-- 문서 업데이트: Pull Request 제출
+## 📈 발행 현황
+
+| 구분 | 개수 | 비고 |
+|------|------|------|
+| 총 이슈 문서 | 18개 | |
+| 발행 대상 | **13개** | BE/Infra/AI |
+| 완료 (제외) | 5개 | FE - 별도 프로젝트 |
 
 ---
 
-**문서 버전**: v1.0  
-**최종 업데이트**: 2025-11-26  
-**작성자**: AI Agent
-
+**최종 업데이트**: 2025-12-01  
+**기반 문서**: `docs/MVP_Task_WBS_and_DAG.md`

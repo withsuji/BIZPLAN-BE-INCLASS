@@ -23,19 +23,20 @@ fi
 echo "✅ GitHub CLI 인증 확인 완료"
 echo ""
 
-# 발행할 이슈 목록 (EPIC-0 제외)
+# 발행할 이슈 목록 (EPIC-0 FE 이슈 제외 - 별도 프로젝트에서 완료됨)
+# 제외 대상: 004, 005, 006, 008, 009 (FE Layout, Schedule, Dashboard, Summary, Billing UI)
 declare -a ISSUES=(
     "001_EPIC4-SYS-001_Infrastructure.md"
     "002_EPIC4-SYS-002_OAuth.md"
-    "004_EPIC4-SYS-003_CICD.md"
+    "003_EPIC4-SYS-003_CICD.md"
     "007_EPIC4-NFR-001_Logging.md"
     "010_EPIC1-BE-001_Calendar_Sync.md"
-    "011_EPIC1-BE-002_Policy.md"
-    "012_EPIC2-BE-001_Focus.md"
-    "013_EPIC3-BE-001_Time_Tracking.md"
-    "014_EPIC2-AI-001_LLM.md"
-    "015_EPIC1-BE-003_Slot.md"
-    "016_EPIC2-BE-002_Summary_Storage.md"
+    "011_EPIC2-AI-001_LLM.md"
+    "012_EPIC1-BE-002_Policy.md"
+    "013_EPIC2-BE-001_Focus.md"
+    "014_EPIC3-BE-001_Time_Tracking.md"
+    "015_EPIC2-BE-002_Summary_Storage.md"
+    "016_EPIC1-BE-003_Slot.md"
     "017_EPIC3-BE-002_Invoice.md"
     "018_EPIC3-BE-003_Payment.md"
 )
@@ -108,6 +109,9 @@ fi
 
 echo ""
 echo "🔗 이슈 확인: https://github.com/withsuji/BIZPLAN-BE-INCLASS/issues"
+
+
+
 
 
 
